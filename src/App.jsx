@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PostCreate from "./components/PostCreate";
 import PostItem from "./components/PostItem";
 import PostList from "./components/PostList";
+import PostRemove from "./components/PostRemove";
 import "./styles/App.css";
 
 function App() {
@@ -16,11 +17,15 @@ function App() {
     setPosts([...posts, newPost])
   }
 
+  const removePost = (post) => {
+    setPosts(posts.filter(p => p.id !== post.id))
+  }
+
 
   return (
     <div className="App">
       <PostCreate create={createPost} />
-      <PostList posts={posts} />
+      <PostList remove={removePost} posts={posts} />
     </div >
   );
 }
