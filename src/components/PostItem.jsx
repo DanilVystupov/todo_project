@@ -1,15 +1,26 @@
-import React from "react";
-import PostRemove from "./PostRemove";
+import React, { useState } from "react";
+import "../styles/App.css";
 
 const PostItem = (props) => {
+
+    const [value, setValue] = useState(props.post.completed)
+
     return (
         <div className="post">
             <div className="post__content">
-                <div>{props.number}. {props.post.title}</div>
+                <div style={value ? { textDecoration: 'none' } : { textDecoration: 'line-through' }}>
+                    {props.number}. {props.post.title}
+                </div>
                 <div className="post__btns">
-                    <PostRemove onClick={() => props.remove(props.post)}>
+                    <button onClick={() => props.remove(props.post)}>
                         Удалить
-                    </PostRemove>
+                    </button>
+                    <button onClick={function () {
+                        props.completed(props.post)
+                        setValue(!value)
+                    }} >
+                        Выполнено
+                    </button>
                 </div>
             </div>
         </div >

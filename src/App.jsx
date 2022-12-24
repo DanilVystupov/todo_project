@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import PostCreate from "./components/PostCreate";
-import PostItem from "./components/PostItem";
 import PostList from "./components/PostList";
-import PostRemove from "./components/PostRemove";
 import "./styles/App.css";
 
 function App() {
   const [posts, setPosts] = useState([
-    { id: 1, title: 'Купить макКомбо' },
-    { id: 2, title: 'Купить масло' },
-    { id: 3, title: 'Купить хлеб' },
+    { id: 1, completed: true, title: 'Купить макКомбо' },
+    { id: 2, completed: false, title: 'Купить масло' },
+    { id: 3, completed: false, title: 'Купить хлеб' },
   ])
 
 
@@ -21,11 +19,21 @@ function App() {
     setPosts(posts.filter(p => p.id !== post.id))
   }
 
+  const completedPost = (post) => {
+    setPosts(
+      posts.map(p => {
+        if (p.id === post.id) {
+          p.completed = !p.completed
+        }
+        return p
+      }))
+  }
+
 
   return (
     <div className="App">
       <PostCreate create={createPost} />
-      <PostList remove={removePost} posts={posts} />
+      <PostList completed={completedPost} remove={removePost} posts={posts} />
     </div >
   );
 }

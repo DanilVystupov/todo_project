@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const PostCreate = ({ create }) => {
-    const [post, setPost] = useState({ title: '' })
+    const [post, setPost] = useState({ title: '', completed: false })
 
     function addPost(e) {
         e.preventDefault()
